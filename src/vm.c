@@ -22,7 +22,7 @@
 #include "opcode.h"
 #include "class.h"
 #include "symbol.h"
-#include "console.h"
+// #include "console.h"
 
 #include "c_string.h"
 #include "c_range.h"
@@ -56,7 +56,7 @@ static char *find_irep_symbol( uint8_t *p, int n )
 */
 static void not_supported(void)
 {
-  console_printf("Not supported!\n");
+//  console_printf("Not supported!\n");
 }
 
 
@@ -403,7 +403,7 @@ inline static int op_send( mrb_vm *vm, uint32_t code, mrb_value *regs )
   mrb_proc *m = find_method(vm, recv, sym_id);
 
   if( m == 0 ) {
-    console_printf("no method(%s)!\n", sym);
+//    console_printf("no method(%s)!\n", sym);
   } else {
     if( m->c_func == 0 ) {
       // Ruby method
@@ -1330,7 +1330,7 @@ int vm_run( mrb_vm *vm )
     case OP_TCLASS:     ret = op_tclass    (vm, code, regs); break;
     case OP_STOP:       ret = op_stop      (vm, code, regs); break;
     default:
-      console_printf("Skip OP=%02x\n", GET_OPCODE(code));
+//      console_printf("Skip OP=%02x\n", GET_OPCODE(code));
       break;
     }
   } while( !vm->flag_preemption );
@@ -1351,11 +1351,11 @@ int vm_run( mrb_vm *vm )
 void debug_irep(mrb_vm *vm, mrb_irep *irep)
 {
   if( irep->unused == 1 ) {
-    console_printf("  not used.\n");
+//    console_printf("  not used.\n");
     return;
   }
-  console_printf("  code:0x%x\n", (int)((char *)irep->code - (char *)vm->mrb));
-  console_printf("  regs:%d\n", irep->nregs);
-  console_printf("  locals:%d\n", irep->nlocals);
+//  console_printf("  code:0x%x\n", (int)((char *)irep->code - (char *)vm->mrb));
+//  console_printf("  regs:%d\n", irep->nregs);
+//  console_printf("  locals:%d\n", irep->nlocals);
 }
 #endif

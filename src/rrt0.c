@@ -24,7 +24,7 @@
 #include "class.h"
 #include "vm.h"
 #include "rrt0.h"
-#include "hal/hal.h"
+// #include "hal/hal.h"
 
 
 /***** Constat values *******************************************************/

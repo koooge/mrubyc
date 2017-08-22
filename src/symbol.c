@@ -13,7 +13,7 @@
 
 #include <string.h>
 #include "symbol.h"
-#include "console.h"
+// #include "console.h"
 
 
 struct SYM_INDEX {
@@ -60,14 +60,14 @@ mrb_sym add_sym(const char *str)
   if( sym_id < 0 ) {
     // check overflow.
     if( sym_index_pos >= MAX_SYMBOLS_COUNT ) {
-      console_printf( "Overflow %s '%s'\n", "MAX_SYMBOLS_COUNT", str );
+      // console_printf( "Overflow %s '%s'\n", "MAX_SYMBOLS_COUNT", str );
       return -1;
     }
     int len = strlen(str);
     if( len == 0 ) return -1;
     len++;
     if( len > (MAX_SYMBOLS_SIZE - (sym_table_pos - sym_table)) ) {
-      console_printf( "Overflow %s '%s'\n", "MAX_SYMBOLS_SIZE", str );
+      // console_printf( "Overflow %s '%s'\n", "MAX_SYMBOLS_SIZE", str );
       return -1;
     }
 

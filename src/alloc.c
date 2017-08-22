@@ -16,10 +16,10 @@
 #include <stddef.h>
 #include <string.h>
 #include "alloc.h"
-#include "console.h"
+//#include "console.h"
 
 //
-#define ALLOC_TOTAL_MEMORY_SIZE 0x2800
+#define ALLOC_TOTAL_MEMORY_SIZE 0x140
 
 // address space 16bit, 64KB
 #define ALLOC_MAX_BIT 16
@@ -60,7 +60,7 @@ static uint8_t memory_pool[ALLOC_TOTAL_MEMORY_SIZE];
 struct USED_BLOCK {
   unsigned int t: 1;  /* FLAG_TAIL_BLOCK or FLAG_NOT_TAIL_BLOCK */
   unsigned int f: 1;  /* FLAG_FREE_BLOCK or BLOCK_IS_NOT_FREE */
-  unsigned int size: 14; /* block size, header included */
+  unsigned int size: 6; /* block size, header included */
   struct USED_BLOCK *prev;  /* link to previous block */
   uint8_t data[];
 };
@@ -68,7 +68,7 @@ struct USED_BLOCK {
 struct FREE_BLOCK {
   unsigned int t: 1;  /* 0: not tail,  1: tail */
   unsigned int f: 1;  /* 0: not free,  1: free */
-  unsigned int size: 14; /* block size, header included */
+  unsigned int size: 6; /* block size, header included */
   struct FREE_BLOCK *prev;  /* link to previous block */
   struct FREE_BLOCK *next_free;
   struct FREE_BLOCK *prev_free;
@@ -184,7 +184,7 @@ uint8_t *mrbc_raw_alloc(uint32_t size)
   }
   if( index >= ALLOC_1ST_LAYER*ALLOC_2ND_LAYER ){
     // out of memory
-    console_print("Fatal error: Out of memory.\n");
+//    console_print("Fatal error: Out of memory.\n");
     return NULL;
   }
 
